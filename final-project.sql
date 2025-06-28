@@ -15,7 +15,6 @@ WHERE
 -- JIM	MOSTEL
 
 
-
 -- 2. Find staffs email living in city Lethbridge.
 
 SELECT 
@@ -33,7 +32,6 @@ WHERE
 -- Mike.Hillyer@sakilastaff.com
 
 
-
 -- 3. Find the number of rentals returned the same day.
 
 SELECT 
@@ -45,7 +43,6 @@ WHERE
 
 -- Ouput: 
 -- 105
-
 
 
 -- 4. Find the number of films per month, rented to a customer by the staff member Mike Hillyer in 2005.
@@ -71,7 +68,6 @@ ORDER BY
 -- 6	1163
 -- 7	3342
 -- 8	2892
-
 
 
 -- 5: Find the films title, rental date, rental rate and replacement cost that are rented by inactive customers that live in the country “Virgin Islands, U.S.”.
@@ -110,7 +106,6 @@ ORDER BY
 -- STRANGER STRANGERS 2005-08-17 03:22:10 4.99	12.99
 
 
-
 -- 6: Find the number of unique customers that returned a film in 9 days or more
 
 SELECT 
@@ -125,7 +120,6 @@ WHERE
 -- 567
  	
  	
-  	
 -- 7: Find the total length of the unique films rented by customers whose first name starts with G and the returned date happened in the first 6 months of 2005.
 
 SELECT 
@@ -144,7 +138,6 @@ WHERE
 
 -- Ouput:
 -- 10139
-
 
 
 -- 8: Total number of rentals and amount per store, city, and film category by month in 2005
@@ -196,7 +189,6 @@ ORDER BY
 -- 05	1	Lethbridge	Comedy	    37	140.63
 
 
-
 -- 9: Find the most rented movie in each category.
 
 SELECT 
@@ -243,7 +235,6 @@ ORDER BY
 -- Classics	TIMBERLAND SKY   	31
 
 
-
 -- 10: Write a query to show daily, weekly, and monthly active users. Make the assumption that the current date is 2005-08-30. 
 
 SELECT 
@@ -276,7 +267,6 @@ WHERE
 -- Monthly	599
 
 
-
 -- 11: Calculate the cumulative Payment Amount per Customer and Payment Date.
 
 SELECT 
@@ -295,14 +285,12 @@ ORDER BY
     p1.customer_id, 
     p1.payment_date;
 
-
 -- Output: 
 -- 1	2005-05-25 11:30:37	2.99	2.99
 -- 1	2005-05-28 10:35:23	0.99	3.98
 -- 1	2005-06-15 00:54:12	5.99	9.97
 -- 1	2005-06-15 18:02:53	0.99	10.96
 -- 1	2005-06-15 21:08:46	9.99	20.95
-
 
 
 -- 12: Rank top 100 customers based on their total revenue. (Make use of window functions)
@@ -334,7 +322,6 @@ LIMIT 100;
 -- 144	195.58	3
 -- 137	194.61	4
 -- 178	194.61	4
-
 
 
 -- 13: Find the most popular actor by each Category, based on the number of times their movies are rented. (Make use of CTEs)
