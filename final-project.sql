@@ -103,7 +103,7 @@ ORDER BY
 -- WASTELAND DIVINE	2005-08-21 11:20:21	2.99	18.99
 -- BIKINI BORROWERS	2005-08-21 03:57:15	4.99	26.99
 -- SOMETHING DUCK	2005-08-18 13:17:30	4.99	17.99
--- STRANGER STRANGERS 2005-08-17 03:22:10 4.99	12.99
+-- STRANGER STRANGERS 2005-08-17 03:22:10       4.99	12.99
 
 
 -- 6: Find the number of unique customers that returned a film in 9 days or more
@@ -182,11 +182,11 @@ ORDER BY
 	rental_month, s.store_id, ci.city, cat.name;
 
 -- Ouput: (LIMIT 5)
--- 05	1	Lethbridge	Action	    40	179.60
+-- 05	1	Lethbridge	Action	        40	179.60
 -- 05	1	Lethbridge	Animation	34	141.66
 -- 05	1	Lethbridge	Children	36	155.64
 -- 05	1	Lethbridge	Classics	29	101.71
--- 05	1	Lethbridge	Comedy	    37	140.63
+-- 05	1	Lethbridge	Comedy	        37	140.63
 
 
 -- 9: Find the most rented movie in each category.
@@ -229,9 +229,9 @@ ORDER BY
 
 -- Output:
 -- Action	RUGRATS SHAKESPEARE	30
--- Action	SUSPECTS QUILLS	    30
--- Animation	JUGGLER HARDLY	32
--- Children	ROBBERS JOON	    31
+-- Action	SUSPECTS QUILLS	        30
+-- Animation	JUGGLER HARDLY	        32
+-- Children	ROBBERS JOON	        31
 -- Classics	TIMBERLAND SKY   	31
 
 
@@ -251,7 +251,7 @@ SELECT
 FROM 
 	rental
 WHERE 
-	rental_date BETWEEN '2005-08-24' AND '2005-08-30' -- αν βάλω 2005-08-23 τότε παίρνω ouput 374. δεν ειμαι σιγουρη για το ποια ημερομηνια βαζω αρχικη 
+	rental_date BETWEEN '2005-08-24' AND '2005-08-30'
 UNION ALL
 SELECT 
 	'Monthly', 
