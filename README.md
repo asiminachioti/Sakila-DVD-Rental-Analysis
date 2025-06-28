@@ -1,2 +1,3 @@
 # Sakila-DVD-Rental-Analysis
-SQL-based analytics solution for the Sakila sample database, providing business insights.
+
+This repository contains SQL queries for analyzing and exploring the Sakila sample database, a database developed by MySQL that simulates a fictional DVD rental store.
