@@ -238,33 +238,83 @@ ORDER BY
 -- 10: Write a query to show daily, weekly, and monthly active users. Make the assumption that the current date is 2005-08-30. 
 
 SELECT 
-	'Daily' AS period, 
-	COUNT(DISTINCT customer_id) AS active_users
-FROM 
-	rental 
-WHERE 
-	DATE(rental_date) = '2005-08-30'
-UNION ALL  
-SELECT 
-	'Weekly', 
-	COUNT(DISTINCT customer_id) AS active_users
-FROM 
-	rental
-WHERE 
-	rental_date BETWEEN '2005-08-24' AND '2005-08-30'
-UNION ALL
-SELECT 
-	'Monthly', 
-	COUNT(DISTINCT customer_id) AS active_users
-FROM 
-	rental
-WHERE 
-    DATE(rental_date) BETWEEN '2005-08-01' AND '2005-08-30';
+    CASE 
+        WHEN period_date IS NOT NULL THEN DATE_FORMAT(period_date, '%Y-%m-%d')
+        WHEN week_info IS NOT NULL THEN week_info
+        ELSE 'Full Month'
+    END AS period_info,
+    rental_count,
+    active_users,
+    period_type
+FROM (
+    -- 1. Daily (1-30 August)
+    SELECT 
+        DATE(rental_date) AS period_date,
+        COUNT(*) AS rental_count,
+        COUNT(DISTINCT customer_id) AS active_users,
+        'daily' AS period_type,
+        NULL AS week_info
+    FROM 
+        rental
+    WHERE 
+        DATE(rental_date) BETWEEN '2005-08-01' AND '2005-08-30'
+    GROUP BY 
+        DATE(rental_date)
+    UNION ALL
+    -- 2. Weekly (all August weeks)
+    SELECT 
+        NULL AS period_date,
+        COUNT(*) AS rental_count,
+        COUNT(DISTINCT customer_id) AS active_users,
+        'weekly' AS period_type,
+        CONCAT('Week ', weeks.week_num) AS week_info
+    FROM 
+        (SELECT 1 AS week_num UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5) weeks
+    LEFT JOIN 
+        rental r ON 
+            weeks.week_num = WEEK(r.rental_date, 3) - 30 AND
+            DATE(r.rental_date) BETWEEN '2005-08-01' AND '2005-08-30'
+    GROUP BY 
+        weeks.week_num
+    UNION ALL
+    -- 3. Monthly (August 1-30)
+    SELECT 
+        NULL AS period_date,
+        COUNT(*) AS rental_count,
+        COUNT(DISTINCT customer_id) AS active_users,
+        'monthly' AS period_type,
+        'Full Month' AS week_info
+    FROM 
+        rental
+    WHERE 
+        DATE(rental_date) BETWEEN '2005-08-01' AND '2005-08-30'
+) AS combined_data
+ORDER BY 
+    CASE period_type
+        WHEN 'daily' THEN 1
+        WHEN 'weekly' THEN 2
+        ELSE 3
+    END,
+    period_date,
+    week_info;
 
--- Ouput:
--- Daily	0
--- Weekly	0
--- Monthly	599
+-- Output:
+-- 2005-08-01	671	413	daily
+-- 2005-08-02	643	394	daily
+-- 2005-08-16	23	23	daily
+-- 2005-08-17	593	384	daily
+-- 2005-08-18	621	403	daily
+-- 2005-08-19	628	379	daily
+-- 2005-08-20	624	381	daily
+-- 2005-08-21	659	404	daily
+-- 2005-08-22	626	383	daily
+-- 2005-08-23	598	374	daily
+-- Week 1	1314	529	weekly
+-- Week 2	 1	 0	weekly
+-- Week 3	3148	595	weekly
+-- Week 4	1224	527	weekly
+-- Week 5	  1	 0	weekly
+-- Full Month	5686	599	monthly
 
 
 -- 11: Calculate the cumulative Payment Amount per Customer and Payment Date.
