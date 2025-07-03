@@ -357,7 +357,7 @@ GROUP BY
 ORDER BY
 	rental_month, s.store_id, ci.city, cat.name;
 
--- Output: (LIMIT 5)
+-- Output:
 -- 05	1	Lethbridge	Action	    40	179.60
 -- 05	1	Lethbridge	Animation	34	141.66
 -- 05	1	Lethbridge	Children	36	155.64
@@ -567,7 +567,7 @@ WHERE
 ORDER BY 
     category_name;
 
--- Output: (LIMIT 5)
+-- Output:
 -- Action	NATALIE HOPKINS	122
 -- Animation	JAYNE NOLTE	133
 -- Children	HELEN VOIGHT	97
